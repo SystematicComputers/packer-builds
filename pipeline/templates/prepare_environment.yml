@@ -1,0 +1,47 @@
+stages:
+- stage: prepare_environment
+  jobs:
+    - job: echo_variables
+      steps:
+      - bash: |
+          echo "========================================== Check Variables =============================================" 
+          echo os_family:                     ${{ parameters.os_family }}
+          echo os_flavor:                     ${{ parameters.os_flavor }}
+          echo os_version:                    ${{ parameters.os_version }}
+          echo guest_os_type:                 ${{ parameters.guest_os_type }}
+          echo build_directory:               ${{ parameters.build_directory }}
+          echo vsphere_username:              ${{ parameters.vsphere_username }}
+          echo vsphere_password:              ${{ parameters.vsphere_password }}
+          echo vsphere_server:                ${{ parameters.vsphere_server }}
+          echo winrm_connection_username:     ${{ parameters.winrm_connection_username }}
+          echo winrm_connection_password:     ${{ parameters.winrm_connection_password }}
+          echo ssh_username:                  ${{ parameters.ssh_username }}
+          echo ssh_password:                  ${{ parameters.ssh_password }}
+          echo vsphere_datacenter:            ${{ parameters.vsphere_datacenter }}
+          echo vsphere_cluster:               ${{ parameters.vsphere_cluster }}
+          echo vsphere_datastore:             ${{ parameters.vsphere_datastore }}
+          echo vsphere_folder:                ${{ parameters.vsphere_folder }}
+          echo vsphere_library:               ${{ parameters.vsphere_library }}
+
+    
+    - job: install_tools
+      dependsOn: echo_variables
+      steps:
+      - bash: |
+          echo "========================================== Install Tools =============================================" 
+          sudo apt-get update
+          sudo apt-get -y upgrade packer
+    
+    - job: test_tools
+      dependsOn: install_tools
+      steps:
+      - bash: |
+          echo "========================================== Test Tools =============================================" 
+          echo packer version: $(packer -v)
+    
+    - job: init_plugins
+      dependsOn: test_tools
+      steps:
+      - bash: |
+          echo "========================================== Init Packer Plugins =============================================" 
+          packer init required_plugins.pkr.hcl

@@ -10,7 +10,7 @@
 
 The home of all things for [Packer](https://www.packer.io/docs).
 
-This repo contains packer scripts using HCL language to create vmware ovf files. Files were based off [packer-vsphere-hcl](https://github.com/tvories/packer-vsphere-hcl) git repo by [Taylor Vories](https://github.com/tvories)
+This repo contains example packer build file using HCL language to create vmware ovf files. Files were based off [packer-vsphere-hcl](https://github.com/tvories/packer-vsphere-hcl) git repo by [Taylor Vories](https://github.com/tvories). 
 
 ## Operating Systems
 - Debian
@@ -89,7 +89,6 @@ packer
 |   └── Windows
 |       └── desktop
 ├── drivers
-|   └── vmware
 ├── pipeline
 └── scripts
     └── linux
