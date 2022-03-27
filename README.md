@@ -141,11 +141,11 @@ Each pipeline has the following variables
 
 ``` text
 variables:
-  - group: "(vcenter)"
+  - group: "vcenter"
   - group: "pkr_svc_acc"
   - group: "packer_auto_variables"
   - group: "(os_flavor)_(os_family)_(os_version)"
-  - group: "ccc"
+  - group: "(credentials)"
 ```
 
 Under [Library](https://azure.microsoft.com/en-au/services/devops/) create variable groups per os build name (os_flavor)*(os_family)*(os_version)
